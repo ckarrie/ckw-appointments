@@ -1,0 +1,155 @@
+{% extends 'ckw_appointments/materializedcss/base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+
+{% block submenu %}
+    {% include 'ckw_appointments/materializedcss/submenu.html' %}
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.check-task-btn').click(function () {
+            if ($(this).hasClass('grey')){
+                 $(this).find('i').text('check');
+                $(this).removeClass('grey').addClass('green');
+            } else {
+                alert("Wie was!!!!")
+                //$(this).find('i').text('');
+                //$(this).removeClass('green').addClass('grey');
+            }
+
+        })
+    });
+    </script>
+{% endblock head %}
+
+{% block main_content %}
+    <div id="overview" class="col s12 m12">
+
+        {% if user.is_authenticated %}
+
+            <div class="row section">
+                <p>Hallo {{ user.get_full_name }}</p>
+            </div>
+
+            <div class="row section">
+
+
+
+                    {% for app in object_list %}
+
+                        <div class="col s12 m12 l8 xl4 xxl4">
+                            <div class="card z-depth-3">
+                                <div class="card-content">
+                                    <span class="card-title">{% trans "ToDo's" %}</span>
+                                    <p>{{ app.title }}</p>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="card-content">
+
+                                    <ul class="collapsible" data-collapsible="accordion">
+
+                                        {% for day, appointments in app.appointments_by_days.items %}
+                                            <li>
+                                                <div class="collapsible-header">
+                                                    {% if forloop.first %}
+                                                        <span class="red-text"><i class="material-icons">directions_run</i></span>{{ day|naturalday }}
+                                                    {% else %}
+                                                        <i class="material-icons">directions_walk</i>{{ day|naturalday }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="collapsible-body">
+
+                                                        {% for appointment in appointments %}
+                                                            <span>
+                                                            <p><strong>{{ appointment }}</strong></p><br />
+                                                            {% for task in appointment.appointmenttask_set.all %}
+                                                                <div class="chip">{{ task }}</div> <button class="btn grey right btn-floating tiny1 check-task-btn"><i class="material-icons tiny1"></i> </button> <br />
+                                                            {% endfor %}
+                                                             </span>
+                                                            {% if not forloop.last %}
+                                                                <br />
+                                                                <div class="divider"></div>
+                                                                <br />
+                                                            {% endif %}
+                                                            {% for upload in appointment.appointmentupload_set.all %}
+                                                                <a href="{{ upload.filefield.url }}"><i class="material-icons">picture_as_pdf</i> {{ upload.get_filename }}</a> <button class="btn grey right btn-floating tiny1 check-task-btn"><i class="material-icons tiny1"></i> </button> <br />
+                                                            {% endfor %}
+                                                        {% endfor %}
+
+                                                </div>
+                                            </li>
+
+                                        {% endfor %}
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+
+            </div>
+
+            {% if perms.ckw_appointments.add_appointment %}
+
+                <div class="row section">
+                    <a href="/db/ckw_appointments/" class="btn red">{% trans "New appointments" %}</a>
+                </div>
+            {% endif %}
+
+        {% else %}
+
+            <div class="row section">
+                <div class="col s12 m5 l5 xl4 xxl3">
+                    <div class="card z-depth-3">
+                        <div class="card-content">
+                            <form action="{% url 'user_login' %}?next={% url 'app_index' %}" method="post">
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title">{% trans "Login to LOGO" %}</span>
+                                    <p>{% trans "Please enter your username and password:" %}</p>
+                                </div>
+                                <div class="divider"></div>
+
+                                <div class="card-content">
+
+                                    {% csrf_token %}
+                                    <div class="row" style="margin-bottom: 0">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input placeholder="{% trans "Username" %}" id="id_username" type="text"
+                                                   class="validate" name="username">
+                                            <label for="id_username">{% trans "Username" %}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">vpn_key</i>
+                                            <input id="id_password" type="password" class="validate" name="password">
+                                            <label for="id_password">{% trans "Password" %}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="waves-effect waves-light btn"
+                                                type="submit">{% trans "Login" %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+
+    </div>
+{% endblock %}

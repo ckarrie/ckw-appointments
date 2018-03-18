@@ -1,0 +1,77 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--
+    Production:
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" media="screen,projection"/>
+    -->
+    <link type="text/css" rel="stylesheet" href="{% static 'ckw_appointments/css/materialize.css' %}" media="screen,projection"/>
+
+    <meta name="theme-color" content="#205081">
+    <title>{% block title %}Diditnow{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{% static 'ckw_appointments/js/materialize.js' %}"></script>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'ckw_appointments/css/styles.css' %}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'ckw_appointments/css/print.css' %}" media="print"/>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+    </script>
+    {% block head %}
+    {% endblock head %}
+</head>
+
+<body>
+
+{% include 'ckw_appointments/materializedcss/header.html' %}
+
+<div class="no-print">
+{% block breadcrums %}
+{% endblock %}
+</div>
+
+<main>
+    <div class="row">
+        {% block main_row %}
+            <div class="col s12">
+
+                {% block submenu_row %}
+
+                    <div class="row hide-on-med-and-down">
+                        <div class="section">
+                            <div class="col s12">
+                                <ul class="tabs z-depth-3 submenu">
+                                    {% block submenu %}
+                                        <p>block submenu</p>
+                                    {% endblock %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endblock %}
+
+
+
+                {% block main_content %}
+                    <p>block main_content</p>
+                {% endblock main_content %}
+
+            </div>
+        {% endblock main_row %}
+    </div>
+</main>
+
+
+</body>
+</html>

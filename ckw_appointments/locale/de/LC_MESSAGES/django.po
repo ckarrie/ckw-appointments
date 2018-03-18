@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Christian Karrié <christian@karrie.info>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-18 16:40+0100\n"
+"PO-Revision-Date: 2018-03-18 16:41+0100\n"
+"Last-Translator: Christian Karrié <christian@karrie.info>\n"
+"Language-Team: Deutsch <>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: models.py:18
+msgid "App"
+msgstr "Anwendung"
+
+#: models.py:19
+msgid "Apps"
+msgstr "Anwendungen"
+
+#: models.py:34
+msgid "Appointment"
+msgstr "Hausaufgabe"
+
+#: models.py:35
+msgid "Appointments"
+msgstr "Hausaufgaben"
+
+#: models.py:55
+msgid "Task"
+msgstr "Aufgabe"
+
+#: models.py:56
+#| msgid "Task"
+msgid "Tasks"
+msgstr "Aufgaben"
+
+#: models.py:71
+msgid "Task Log"
+msgstr ""
+
+#: models.py:72
+msgid "Task Logs"
+msgstr ""
+
+#: models.py:86
+msgid "Upload"
+msgstr ""
+
+#: models.py:87
+msgid "Uploads"
+msgstr ""
+
+#: templates/ckw_appointments/materializedcss/header.html:11
+msgid "Logout"
+msgstr "Bin weg"
+
+#: templates/ckw_appointments/materializedcss/index.html:48
+msgid "ToDo's"
+msgstr ""
+
+#: templates/ckw_appointments/materializedcss/index.html:103
+msgid "New appointments"
+msgstr "Aufgaben verwalten"
+
+#: templates/ckw_appointments/materializedcss/index.html:116
+msgid "Login to LOGO"
+msgstr ""
+
+#: templates/ckw_appointments/materializedcss/index.html:117
+msgid "Please enter your username and password:"
+msgstr ""
+
+#: templates/ckw_appointments/materializedcss/index.html:127
+#: templates/ckw_appointments/materializedcss/index.html:129
+msgid "Username"
+msgstr "Benutzername"
+
+#: templates/ckw_appointments/materializedcss/index.html:136
+msgid "Password"
+msgstr "Passwort"
+
+#: templates/ckw_appointments/materializedcss/index.html:141
+msgid "Login"
+msgstr "bin dabei"
+
+#: templates/ckw_appointments/materializedcss/submenu.html:5
+msgid "Overview"
+msgstr "Übersicht"

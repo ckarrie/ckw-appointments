@@ -1,0 +1,31 @@
+{% load static %}
+{% load i18n %}
+<header>
+
+    {% if user.is_authenticated %}
+
+        <ul id="profile" class="dropdown-content">
+            <li class="empty disabled"><a href="#!" class="disabled">{{ user.get_full_name }}</a></li>
+            <li class="divider"></li>
+            <li class="divider"></li>
+            <li><a href="">{% trans "Logout" %}</a></li>
+        </ul>
+
+    {% endif %}
+
+    <nav class="nav-extended">
+        <div class="nav-wrapper">
+            <div class="brand-logo" style="margin-top: 0.3em;">
+                <a href="{% url 'app_index' %}" class="" >
+                    <img src="{% static 'ckw_appointments/images/nike.png' %}" style="max-height: 30px">
+                    <!-- <span style="text-decoration: double">LogiMaster</span> <sup>&copy;</sup> -->
+                    <!--LOGO <sup>&copy;</sup>-->
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
