@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from django.apps import apps
 from mptt.models import MPTTModel, TreeForeignKey
 from ckw_appointments.utils import upload_handlers
 from django.utils.translation import ugettext_lazy as _
@@ -57,6 +58,20 @@ class AppointmentTask(MPTTModel):
 
     def get_finished_taskslogs(self):
         return self.tasklog_set.filter(status='finished')
+
+    def get_progress_status(self):
+        needed_by = self.appointment.subscribers.all()
+        needed_cnt = needed_by.count()
+        done_in = self.get_finished_taskslogs()
+        done_by = apps.get_model('auth.User').objects.filter(id__in=done_in.values_list('log_status_by', flat=True))
+        finished = needed_cnt <= done_in.count()
+        return {
+            'finished': finished,
+            'needed_cnt': needed_cnt,
+            'done_in': done_in,
+            'done_by': done_by,
+            'needed_by': needed_by
+        }
 
     class Meta:
         verbose_name = _('Task')
