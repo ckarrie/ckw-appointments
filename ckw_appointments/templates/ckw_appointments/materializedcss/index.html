@@ -52,7 +52,7 @@
             <div class="row section">
 
                 {% for app in object_list %}
-                    <div class="col s12 m12 l8 xl4 xxl4">
+                    <div class="col s12 m12 l8 xl6 xxl4">
                         <div class="card z-depth-3">
                             <div class="card-content">
                                 <span class="card-title">{% blocktrans with user=user.get_full_name %}ToDo's of {{ user }}{% endblocktrans %}</span>
@@ -90,8 +90,9 @@
                                                                 <button class="btn right btn-floating tiny1 {% if task.is_finished or prog.finished %}green{% else %}grey check-task-btn pulse{% endif %}" data-check-id="{{ task.pk }}"><i
                                                                         class="material-icons tiny1">{% if task.is_finished or prog.finished %}check{% endif %}</i></button>
                                                                 {% if user.is_staff %}
+                                                                    <span class="right hide-on-med-and-up"><div class="chip">{{ prog.done_in.count }} / {{ prog.needed_cnt }}</div></span>
                                                                     {% for nb in prog.needed_by %}
-                                                                        <span class="right"><div class="chip"><span data-task-id="{{ task.id }}" data-user-id="{{ nb.id }}" style="font-weight: 400" class="{% if nb in prog.done_by %}green-text{% else %}red-text{% endif %}">{{ nb }}</span></div></span>
+                                                                        <span class="right hide-on-small-and-down"><div class="chip"><span data-task-id="{{ task.id }}" data-user-id="{{ nb.id }}" style="font-weight: 400" class="{% if nb in prog.done_by %}green-text{% else %}red-text{% endif %}">{{ nb }}</span></div></span>
                                                                     {% endfor %}
                                                                 {% endif %}
                                                                 <br/>
