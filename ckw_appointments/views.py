@@ -15,7 +15,6 @@ class AppIndexView(generic.ListView):
         if not self.request.user.is_authenticated():
             return qs.none()
 
-
         is_staff = self.request.user.is_staff
         for app in qs:
             app.appointments_by_days = OrderedDict()
@@ -23,7 +22,6 @@ class AppIndexView(generic.ListView):
             end_day = today + timedelta(days=app.overview_days)
             upcoming_appintments = app.appointment_set.filter(
                 begin_dt__date__range=(today, end_day),
-                subscribers__in=[self.request.user]
             )
 
             if not is_staff:
