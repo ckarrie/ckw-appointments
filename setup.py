@@ -6,5 +6,5 @@ setup(
     description="ckw appointments",
     author='Christian Karrie',
     author_email='ckarrie@gmail.com',
-    packages=find_packages(), requires=['django', 'unidecode']
+    packages=find_packages(), requires=['django', 'unidecode', 'djangorestframework']
 )

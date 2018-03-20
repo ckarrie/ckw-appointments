@@ -22,7 +22,7 @@ class AppointmentApp(models.Model):
 class Appointment(models.Model):
     app = models.ForeignKey(AppointmentApp)
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     begin_dt = models.DateTimeField()
     end_dt = models.DateTimeField()
     subscribers = models.ManyToManyField('auth.User')
@@ -47,9 +47,16 @@ class AppointmentTask(MPTTModel):
 
     time_planned = models.FloatField(null=True, blank=True)
     time_taken = models.FloatField(null=True, blank=True)
+    filefield = models.FileField(upload_to=upload_handlers.taskupload_handler, null=True, blank=True)
+
+    def get_filename(self):
+        return os.path.basename(self.filefield.name)
 
     def __unicode__(self):
         return self.title
+
+    def get_finished_taskslogs(self):
+        return self.tasklog_set.filter(status='finished')
 
     class Meta:
         verbose_name = _('Task')
@@ -72,19 +79,6 @@ class TaskLog(models.Model):
         verbose_name_plural = _('Task Logs')
 
 
-class AppointmentUpload(models.Model):
-    task = models.ForeignKey(AppointmentTask, null=True, blank=True)
-    appointment = models.ForeignKey(Appointment)
-    filefield = models.FileField(upload_to=upload_handlers.taskupload_handler)
-    uploaded_by = models.ForeignKey('auth.User')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def get_filename(self):
-        return os.path.basename(self.filefield.name)
-
-    class Meta:
-        verbose_name = _('Upload')
-        verbose_name_plural = _('Uploads')
 
 
 

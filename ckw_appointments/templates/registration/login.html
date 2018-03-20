@@ -1,0 +1,62 @@
+{% extends 'ckw_appointments/materializedcss/base.html' %}
+
+{% load i18n %}
+
+{% block submenu %}
+    {% include 'ckw_appointments/materializedcss/submenu.html' %}
+{% endblock %}
+
+{% block main_content %}
+    <div id="overview" class="col s12 m12">
+        {% if form.is_valid %}
+            <p>Jojojo</p>
+        {% else %}
+            <div class="row section">
+                <div class="col s12 m5 l5 xl4 xxl3">
+                    <div class="card z-depth-3">
+                        <div class="card-content">
+                            <form action="{% url 'user_login' %}?next={% url 'app_index' %}" method="post">
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title">{% trans "Login" %}</span>
+                                    {% if form.errors %}
+                                        <p class=" red-text">
+                                            Benutzername / Passwort falsch. Bitte Gross- und Kleinschreibung beachten.
+                                        </p>
+                                    {% endif %}
+
+                                </div>
+                                <div class="divider"></div>
+
+                                <div class="card-content">
+
+                                    {% csrf_token %}
+                                    <div class="row" style="margin-bottom: 0">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input placeholder="{% trans "Username" %}" id="id_username" type="text"
+                                                   class="validate" name="username">
+                                            <label for="id_username">{% trans "Username" %}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">vpn_key</i>
+                                            <input id="id_password" type="password" class="validate" name="password">
+                                            <label for="id_password">{% trans "Password" %}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="waves-effect waves-light btn"
+                                                type="submit">{% trans "Login" %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

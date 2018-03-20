@@ -12,8 +12,12 @@ class AppointmentTaskAdmin(DraggableMPTTAdmin):
         'indented_title',
     )
 
+
+class TaskLogAdmin(admin.ModelAdmin):
+    list_display = ('task', 'log_status_by', 'log_status_at', 'status')
+
+
 admin.site.register(models.AppointmentApp)
 admin.site.register(models.Appointment)
 admin.site.register(models.AppointmentTask, AppointmentTaskAdmin)
-admin.site.register(models.AppointmentUpload)
-admin.site.register(models.TaskLog)
+admin.site.register(models.TaskLog, TaskLogAdmin)

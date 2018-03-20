@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-18 16:40+0100\n"
-"PO-Revision-Date: 2018-03-18 16:41+0100\n"
+"POT-Creation-Date: 2018-03-20 14:54+0100\n"
+"PO-Revision-Date: 2018-03-20 14:55+0100\n"
 "Last-Translator: Christian Karrié <christian@karrie.info>\n"
 "Language-Team: Deutsch <>\n"
 "Language: \n"
@@ -35,63 +35,64 @@ msgstr "Hausaufgabe"
 msgid "Appointments"
 msgstr "Hausaufgaben"
 
-#: models.py:55
+#: models.py:58
 msgid "Task"
 msgstr "Aufgabe"
 
-#: models.py:56
-#| msgid "Task"
+#: models.py:59
 msgid "Tasks"
 msgstr "Aufgaben"
 
-#: models.py:71
+#: models.py:74
 msgid "Task Log"
 msgstr ""
 
-#: models.py:72
+#: models.py:75
 msgid "Task Logs"
 msgstr ""
 
-#: models.py:86
+#: models.py:89
 msgid "Upload"
 msgstr ""
 
-#: models.py:87
+#: models.py:90
 msgid "Uploads"
 msgstr ""
 
 #: templates/ckw_appointments/materializedcss/header.html:11
+#: templates/ckw_appointments/materializedcss/header.html:39
 msgid "Logout"
 msgstr "Bin weg"
 
-#: templates/ckw_appointments/materializedcss/index.html:48
-msgid "ToDo's"
-msgstr ""
+#: templates/ckw_appointments/materializedcss/header.html:31
+msgid "Profile"
+msgstr "Profil"
 
-#: templates/ckw_appointments/materializedcss/index.html:103
+#: templates/ckw_appointments/materializedcss/index.html:56
+#, python-format
+msgid "ToDo's of %(user)s"
+msgstr "ToDo's von %(user)s"
+
+#: templates/ckw_appointments/materializedcss/index.html:106
 msgid "New appointments"
 msgstr "Aufgaben verwalten"
 
-#: templates/ckw_appointments/materializedcss/index.html:116
-msgid "Login to LOGO"
-msgstr ""
+#: templates/ckw_appointments/materializedcss/index.html:119
+#: templates/ckw_appointments/materializedcss/index.html:143
+#: templates/registration/login.html:21 templates/registration/login.html:51
+msgid "Login"
+msgstr "bin dabei"
 
-#: templates/ckw_appointments/materializedcss/index.html:117
-msgid "Please enter your username and password:"
-msgstr ""
-
-#: templates/ckw_appointments/materializedcss/index.html:127
 #: templates/ckw_appointments/materializedcss/index.html:129
+#: templates/ckw_appointments/materializedcss/index.html:131
+#: templates/registration/login.html:37 templates/registration/login.html:39
 msgid "Username"
 msgstr "Benutzername"
 
-#: templates/ckw_appointments/materializedcss/index.html:136
+#: templates/ckw_appointments/materializedcss/index.html:138
+#: templates/registration/login.html:46
 msgid "Password"
 msgstr "Passwort"
-
-#: templates/ckw_appointments/materializedcss/index.html:141
-msgid "Login"
-msgstr "bin dabei"
 
 #: templates/ckw_appointments/materializedcss/submenu.html:5
 msgid "Overview"
