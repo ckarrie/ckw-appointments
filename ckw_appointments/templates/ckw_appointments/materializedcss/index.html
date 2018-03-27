@@ -61,51 +61,61 @@
                             <div class="divider"></div>
                             <div class="card-content">
 
-                                <ul class="collapsible" data-collapsible="accordion">
+                                {% if app.appointments_by_days %}
 
-                                    {% for day, appointments in app.appointments_by_days.items %}
-                                        <li>
-                                            <div class="collapsible-header">
-                                                {% if forloop.first %}
-                                                    <span class="red-text"><i class="material-icons">directions_run</i></span>{{ day|naturalday }}
-                                                {% else %}
-                                                    <i class="material-icons">directions_walk</i>{{ day|naturalday }}
-                                                {% endif %}
-                                            </div>
-                                            <div class="collapsible-body">
+                                    <ul class="collapsible" data-collapsible="accordion">
 
-                                                {% for appointment in appointments %}
-                                                    <span>
-                                                        <p><strong>{{ appointment }}</strong></p>
-                                                        {% if appointment.description %}
-                                                            <p style="font-weight: 300">{{ appointment.description|linebreaksbr }}</p>
-                                                        {% endif %}
-                                                        <br/>
-                                                        {% for task in appointment.tasks %}
-                                                            {% with prog=task.get_progress_status %}
-                                                                <div class="chip">{{ task }}</div>
-                                                                {% if task.filefield %}
-                                                                    <a href="{{ task.filefield.url }}" style="font-weight: 300"><i class="material-icons tiny1">picture_as_pdf</i> {{ task.get_filename }}</a>
-                                                                {% endif %}
-                                                                <button class="btn right btn-floating tiny1 {% if task.is_finished or prog.finished %}green{% else %}grey check-task-btn pulse{% endif %}" data-check-id="{{ task.pk }}"><i
-                                                                        class="material-icons tiny1">{% if task.is_finished or prog.finished %}check{% endif %}</i></button>
-                                                                {% if user.is_staff %}
-                                                                    <span class="right hide-on-med-and-up"><div class="chip">{{ prog.done_in.count }} / {{ prog.needed_cnt }}</div></span>
-                                                                    {% for nb in prog.needed_by %}
-                                                                        <span class="right hide-on-small-and-down"><div class="chip"><span data-task-id="{{ task.id }}" data-user-id="{{ nb.id }}" style="font-weight: 400" class="{% if nb in prog.done_by %}green-text{% else %}red-text{% endif %}">{{ nb }}</span></div></span>
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                                <br/>
-                                                            {% endwith %}
-                                                        {% endfor %}
-                                                     </span>
-                                                {% endfor %}
+                                        {% for day, appointments in app.appointments_by_days.items %}
+                                            <li>
+                                                <div class="collapsible-header">
+                                                    {% if forloop.first %}
+                                                        <span class="red-text"><i class="material-icons">directions_run</i></span>{{ day|naturalday }}
+                                                    {% else %}
+                                                        <i class="material-icons">directions_walk</i>{{ day|naturalday }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="collapsible-body">
 
-                                            </div>
-                                        </li>
+                                                    {% for appointment in appointments %}
+                                                        <span>
+                                                            <p><strong>{{ appointment }}</strong></p>
+                                                            {% if appointment.description %}
+                                                                <p style="font-weight: 300">{{ appointment.description|linebreaksbr }}</p>
+                                                            {% endif %}
+                                                            <br/>
+                                                            {% for task in appointment.tasks %}
+                                                                {% with prog=task.get_progress_status %}
+                                                                    <div class="chip">{{ task }}</div>
+                                                                    {% if task.filefield %}
+                                                                        <a href="{{ task.filefield.url }}" style="font-weight: 300"><i class="material-icons tiny1">picture_as_pdf</i> {{ task.get_filename }}</a>
+                                                                    {% endif %}
+                                                                    <button class="btn right btn-floating tiny1 {% if task.is_finished or prog.finished %}green{% else %}grey check-task-btn pulse{% endif %}" data-check-id="{{ task.pk }}"><i
+                                                                            class="material-icons tiny1">{% if task.is_finished or prog.finished %}check{% endif %}</i></button>
+                                                                    {% if user.is_staff %}
+                                                                        <span class="right hide-on-med-and-up"><div class="chip">{{ prog.done_in.count }} / {{ prog.needed_cnt }}</div></span>
+                                                                        {% for nb in prog.needed_by %}
+                                                                            <span class="right hide-on-small-and-down"><div class="chip"><span data-task-id="{{ task.id }}" data-user-id="{{ nb.id }}" style="font-weight: 400" class="{% if nb in prog.done_by %}green-text{% else %}red-text{% endif %}">{{ nb }}</span></div></span>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                    <br/>
+                                                                {% endwith %}
+                                                            {% endfor %}
+                                                         </span>
+                                                    {% endfor %}
 
-                                    {% endfor %}
-                                </ul>
+                                                </div>
+                                            </li>
+
+                                        {% empty %}
+
+
+                                        {% endfor %}
+                                    </ul>
+
+                                {% else %}
+                                    <p>Keine Aufgaben in {{ app.title }}</p>
+
+                                {% endif %}
 
                             </div>
 
